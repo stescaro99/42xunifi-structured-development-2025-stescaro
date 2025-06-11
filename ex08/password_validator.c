@@ -10,7 +10,7 @@ int ft_strlen(const char *s)
     return i;
 }
 
-bool check_cases(const char *s)
+static bool check_cases(const char *s)
 {
     bool upper = false;
     bool lower = false;
@@ -33,7 +33,7 @@ bool check_cases(const char *s)
     return true;
 }
 
-bool diff_pass(const char *s, const char *t)
+static bool diff_pass(const char *s, const char *t)
 {
     if (ft_strlen(s) != ft_strlen(t))
         return true;

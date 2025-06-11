@@ -27,7 +27,7 @@ static bool check_insert(const char *longer, const char *shorter) {
     return true;
 }
 
-bool check_similar(const char *s, const char *t)
+static bool check_similar(const char *s, const char *t)
 {
     int len_s = ft_strlen(s);
     int len_t = ft_strlen(t);
@@ -39,4 +39,19 @@ bool check_similar(const char *s, const char *t)
     if (len_s + 1 == len_t)
         return check_insert(t, s);
     return false;
+}
+
+PwStatus validate_password(const char *new_pw, PasswordHistory *history)
+{
+    if (validate_password_weak(new_pw, (*history)[0]) == 1)
+        return 1;
+    for (int i = 0; i < 3; i++)
+    {
+        if (check_similar(new_pw, (*history)[i]))
+            return 2;
+    }
+    strncpy((*history)[2], (*history)[1], 1024);
+    strncpy((*history)[1], (*history)[0], 1024);
+    strncpy((*history)[0], new_pw, 1024);
+    return 0;
 }
