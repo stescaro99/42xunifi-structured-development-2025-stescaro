@@ -53,5 +53,3 @@ FSNode *get_sibling(const FSNode *node)
     	return NULL;
     return node->sibling;
 }
-
-//test nel ex07

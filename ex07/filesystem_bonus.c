@@ -49,30 +49,3 @@ void free_filesystem(FSNode *node)
     free(node->name);
     free(node);
 }
-
-/*
-int main()
-{
-    FSNode *root = create_folder("root");
-    FSNode *docs = create_folder("docs");
-    FSNode *img = create_folder("images");
-    FSNode *file1 = create_file("file1.txt", 100);
-    FSNode *file2 = create_file("file2.txt", 200);
-    FSNode *pic1 = create_file("pic1.jpg", 500);
-
-    add_child(root, docs);
-    add_child(root, img);
-    add_child(docs, file1);
-    add_child(docs, file2);
-    add_child(img, pic1);
-
-    printf("Struttura del filesystem:\n");
-    print_structure(root, 0);
-
-    int total = compute_total_size(root);
-    printf("\nDimensione totale: %d\n", total);
-
-    free_filesystem(root);
-
-    return 0;
-}*/

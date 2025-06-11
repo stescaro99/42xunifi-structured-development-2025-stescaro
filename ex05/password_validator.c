@@ -51,11 +51,3 @@ PwStatus validate_password(const char *new_pw, const char *curr_pw)
         return 0;
     return 1;
 }
-
-/*int main()
-{
-    char *s = "Ciao123^";
-    char *t = "cIao123^";
-    printf("%d\n", validate_password(s, t));
-    return 0;
-}*/

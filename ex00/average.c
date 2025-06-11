@@ -18,17 +18,3 @@ float average(const int *array, int size)
         return 0.0f;
     return (float)total / number;
 }
-/*
-int main() {
-    int values1[] = {90, 80, 70, 60, 50};
-    int values2[] = {100, -5, 105, 80};
-    int values3[] = {};
-    int values4[] = {101, -1, 200};
-
-    printf("Average 1: %.2f\n", average(values1, 5));
-    printf("Average 2: %.2f\n", average(values2, 4));
-    printf("Average 3: %.2f\n", average(values3, 0));
-    printf("Average 4: %.2f\n", average(values4, 3));
-
-    return 0;
-}*/

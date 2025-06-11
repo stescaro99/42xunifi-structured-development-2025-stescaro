@@ -11,7 +11,6 @@ static GradeNode* find_grade_node(GradeNode *head, const char *grade)
     return NULL;
 }
 
-// Compute the distribution of grades
 GradeNode *compute_distribution(const char **mapped_grades, int size)
 {
     GradeNode *head = NULL;
@@ -53,24 +52,3 @@ void free_distribution(GradeNode *head)
         free(tmp);
     }
 }
-/*
-int main(void)
-{
-    int scores[] = {100, 95, 82, 67, 59, 95, 82, 59, 100, 67};
-    int size = sizeof(scores) / sizeof(scores[0]);
-    const char *mapped_grades[size];
-
-    map_scores(scores, size, plusminus_mapper, mapped_grades);
-
-    printf("Mappatura voti:\n");
-    for (int i = 0; i < size; ++i)
-        printf("Score: %d -> Grade: %s\n", scores[i], mapped_grades[i]);
-
-    GradeNode *dist = compute_distribution(mapped_grades, size);
-
-    print_distribution(dist);
-
-    free_distribution(dist);
-
-    return 0;
-}*/

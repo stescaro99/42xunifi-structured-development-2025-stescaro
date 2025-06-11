@@ -52,20 +52,5 @@ const char* standard_mapper(int score)
 void map_scores(const int *scores, int size, GradeMapper mapper, const char **mapped_grades)
 {
     for (int i = 0; i < size; ++i)
-        mapped_grades[i] = (char*)mapper(scores[i]);
+        mapped_grades[i] = (const char*)mapper(scores[i]);
 }
-/*
-int main()
-{
-    int scores[] = {100, 95, 82, 67, 59};
-    int size = sizeof(scores) / sizeof(scores[0]);
-    char *grades[size];
-
-    map_scores(scores, size, plusminus_mapper, grades);
-
-    for (int i = 0; i < size; ++i)
-    {
-        printf("Score: %d -> Grade: %s\n", scores[i], grades[i]);
-    }
-    return 0;
-}*/
