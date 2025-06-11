@@ -23,7 +23,7 @@ void print_structure(const FSNode *node, int indent)
         return;
     for (int i = 0; i < indent; i++)
         printf("  ");
-    if (node->isDirectory)
+    if (node->size == 0)
         printf("[DIR] %s\n", node->name);
     else
         printf("%s (%d)\n", node->name, node->size);

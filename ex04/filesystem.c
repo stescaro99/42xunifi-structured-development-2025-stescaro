@@ -24,6 +24,8 @@ FSNode *create_folder(const char *name)
 
 void add_child(FSNode *parent, FSNode *child)
 {
+    if (!parent || !child)
+    	return;
     child->parent = parent;
     if (!parent->children)
     {
@@ -40,11 +42,15 @@ void add_child(FSNode *parent, FSNode *child)
 
 FSNode *get_children(const FSNode *parent)
 {
+    if (!parent)
+    	return NULL;
     return parent->children;
 }
 
 FSNode *get_sibling(const FSNode *node)
 {
+    if (!node)
+    	return NULL;
     return node->sibling;
 }
 
