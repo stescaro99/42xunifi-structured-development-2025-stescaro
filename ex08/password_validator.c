@@ -33,7 +33,7 @@ static bool check_cases(const char *s)
     return true;
 }
 
-static bool diff_pass(const char *s, const char *t)
+static  diff_pass(const char *s, const char *t)
 {
     if (ft_strlen(s) != ft_strlen(t))
         return true;
