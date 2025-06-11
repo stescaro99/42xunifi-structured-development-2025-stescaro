@@ -50,11 +50,11 @@ PwStatus validate_password(const char *new_pw, PasswordHistory *history)
         if (check_similar(new_pw, (*history)[i]))
             return 2;
     }
-    strncpy((*history)[2], (*history)[1], 1024);
+    strncpy((*history)[2], (*history)[1], 1023);
     (*history)[2][1023] = '\0';
-    strncpy((*history)[1], (*history)[0], 1024);
+    strncpy((*history)[1], (*history)[0], 1023);
     (*history)[1][1023] = '\0';
-    strncpy((*history)[0], new_pw, 1024);
+    strncpy((*history)[0], new_pw, 1023);
     (*history)[0][1023] = '\0';
     return 0;
 }
