@@ -1,11 +1,11 @@
 #include "filesystem.h"
 
-int compute_total_size(FSNode *node)
+int compute_total_size(const FSNode *node)
 {
     if (!node)
         return 0;
     int total = 0;
-    FSNode *tmp = get_children(node);
+    const FSNode *tmp = get_children(node);
     while (tmp)
     {
         if (tmp->size == 0)
