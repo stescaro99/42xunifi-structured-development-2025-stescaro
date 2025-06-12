@@ -22,4 +22,5 @@ struct MusicLibrary *organize_music_library(const char *directory_path)
         update_music_library(lib, file);
         free(file);
     }
+    return lib;
 }
