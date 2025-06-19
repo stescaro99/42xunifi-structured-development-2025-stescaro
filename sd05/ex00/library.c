@@ -26,12 +26,13 @@ static int parse_line(char *line, t_book *book)
 {
     char *fields[3];
     int i = 0;
-    char *token = strtok_r(line, ",");
+    char *saveptr = NULL;
+    char *token = strtok_r(line, ",", &saveptr);
 
     while (token && i < 3)
     {
         fields[i++] = token;
-        token = strtok_r(NULL, ",");
+        token = strtok_r(NULL, ",", &saveptr);
     }
     if (i != 3)
         return 0;
