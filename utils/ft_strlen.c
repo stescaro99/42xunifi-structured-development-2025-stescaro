@@ -1,6 +1,6 @@
 #include "utils.h"
 
-static int ft_strlen(const char *s)
+int ft_strlen(const char *s)
 {
     int i = 0;
     if (!s)

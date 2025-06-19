@@ -22,25 +22,6 @@ char *str_trim(char *str)
     return str;
 }
 
-int strcasestr_custom(const char *haystack, const char *needle)
-{
-    size_t nlen = ft_strlen(needle);
-    size_t hlen = ft_strlen(haystack);
-    size_t i, j;
-    if (nlen == 0)
-        return 1;
-    for (i = 0; i <= hlen - nlen; i++)
-    {
-        j = 0;
-        while (j < nlen &&
-               tolower((unsigned char)haystack[i + j]) == tolower((unsigned char)needle[j]))
-            j++;
-        if (j == nlen)
-            return 1;
-    }
-    return 0;
-}
-
 static int parse_line(char *line, t_book *book)
 {
     char *fields[3];
@@ -178,4 +159,22 @@ void free_catalog(t_catalog *catalog)
         free(catalog->books[i].author);
     }
     catalog->count = 0;
+}
+
+int main(void)
+{
+    t_catalog catalog;
+    t_book results[10];
+    int found;
+
+    if (!load_catalog("books.csv", &catalog))
+    {
+        printf("Failed to load catalog\n");
+        return 1;
+    }
+    found = search_by_title(&catalog, "harry", results, 10);
+    for (int i = 0; i < found; i++)
+        print_book(&results[i]);
+    free_catalog(&catalog);
+    return 0;
 }

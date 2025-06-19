@@ -5,6 +5,11 @@
 #define MAX_LINE_LEN 1024
 
 #include "../../utils/utils.h"
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
 
 typedef struct s_book
 {

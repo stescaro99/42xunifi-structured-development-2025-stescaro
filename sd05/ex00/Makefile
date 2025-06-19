@@ -1,13 +1,12 @@
 NAME = library
-SRC = library.c
+SRC = library.c ../../utils/ft_strlen.c ../../utils/strcasestr_custom.c
 OBJ = $(SRC:.c=.o)
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = cc
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
