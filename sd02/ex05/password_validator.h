@@ -1,7 +1,7 @@
 #ifndef PASSWORD_VALIDATOR_H
 #define PASSWORD_VALIDATOR_H
 
-#include <stdbool.h>
+#include "../../utils/utils.h"
 
 typedef short PwStatus;
 

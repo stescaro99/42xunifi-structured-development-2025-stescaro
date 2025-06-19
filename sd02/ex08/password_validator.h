@@ -1,7 +1,6 @@
-#ifndef PASSWORD_VALIDATOR_BONUS_H
-#define PASSWORD_VALIDATOR_BONUS_H
+#ifndef PASSWORD_VALIDATOR_H
+#define PASSWORD_VALIDATOR_H
 
-#include <stdbool.h>
 #include <string.h>
 #include "../../utils/utils.h"
 
