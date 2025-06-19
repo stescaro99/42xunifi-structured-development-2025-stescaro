@@ -1,6 +1,6 @@
 #include "first_last.h"
 
-static int is_valid_input(const int *arr, int size, int *first, int *last)
+static int is_valid_input(const int *arr, int size, const int *first, const int *last)
 {
     return (arr != 0 && size > 0 && first != 0 && last != 0);
 }
