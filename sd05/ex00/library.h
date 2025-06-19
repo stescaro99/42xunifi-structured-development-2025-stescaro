@@ -5,7 +5,6 @@
 #define MAX_LINE_LEN 1024
 
 #include "../../utils/utils.h"
-#include "library.h"
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

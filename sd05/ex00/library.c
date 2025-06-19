@@ -15,7 +15,7 @@ char *str_trim(char *str)
         str++;
     if (*str == 0)
         return str;
-    end = str + strlen(str) - 1;
+    end = str + ft_strlen(str) - 1;
     while (end > str && isspace((unsigned char)*end))
         end--;
     *(end + 1) = 0;
@@ -24,8 +24,8 @@ char *str_trim(char *str)
 
 int strcasestr_custom(const char *haystack, const char *needle)
 {
-    size_t nlen = strlen(needle);
-    size_t hlen = strlen(haystack);
+    size_t nlen = ft_strlen(needle);
+    size_t hlen = ft_strlen(haystack);
     size_t i, j;
     if (nlen == 0)
         return 1;
