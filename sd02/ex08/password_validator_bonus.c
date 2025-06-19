@@ -5,6 +5,7 @@ static bool check_replace(const char *s, const char *t)
     bool change = false;
     int i = 0;
     int fail = 0;
+
     while (s[i] && t[i])
     {
         if (s[i] != t[i])
@@ -21,8 +22,10 @@ static bool check_replace(const char *s, const char *t)
 static bool check_insert(const char *longer, const char *shorter)
 {
     bool change = false;
-    int i = 0, j = 0;
+    int i = 0;
+    int j = 0;
     int fail = 0;
+
     while (longer[i])
     {
         if (!change && longer[i] != shorter[j])
@@ -70,14 +73,17 @@ static void safe_strcpy(char *dest, const char *src, size_t dest_size)
 
 PwStatus validate_password(const char *new_pw, PasswordHistory *history)
 {
-    bool valid_password = true;
+    bool valid_password;
+    int i = 0;
 
+    valid_password = true;
     if (validate_password_weak(new_pw, (*history)[0]) == 1)
         return 1;
-    for (int i = 0; valid_password && i < 3; i++)
+    while (i < 3)
     {
         if (check_similar(new_pw, (*history)[i]))
             valid_password = false;
+        i++;
     }
     if (!valid_password)
         return 2;

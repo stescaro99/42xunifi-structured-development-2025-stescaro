@@ -15,8 +15,8 @@ static GradeNode* find_grade_node(GradeNode *head, const char *grade)
 GradeNode *compute_distribution(const char **mapped_grades, int size)
 {
     GradeNode *head = NULL;
-    int i;
-    for (i = 0; i < size; ++i)
+
+    for (int i = 0; i < size; ++i)
     {
         GradeNode *node = find_grade_node(head, mapped_grades[i]);
         if (node)

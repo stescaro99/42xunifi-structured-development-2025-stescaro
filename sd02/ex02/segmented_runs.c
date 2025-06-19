@@ -2,13 +2,12 @@
 
 static int has_consecutive_run(const int *arr, int start, int end)
 {
-    int i;
     int consecutive = 0;
     int found = 0;
 
     if (end - start < 3)
         return 0;
-    for (i = start + 1; i < end; ++i)
+    for (int i = start + 1; i < end; ++i)
     {
         if (arr[i] == arr[i - 1] + 1)
             consecutive++;

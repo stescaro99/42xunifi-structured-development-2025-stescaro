@@ -39,7 +39,9 @@ void print_structure(const FSNode *node, int indent)
 
 void free_filesystem(FSNode *node)
 {
-    FSNode *child, *sibling;
+    FSNode *child;
+    FSNode *sibling;
+    
     if (!node)
         return;
     child = get_children(node);

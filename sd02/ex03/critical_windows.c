@@ -26,8 +26,8 @@ static int condition2(const int *arr)
 
 static int condition3(const int *arr)
 {
-    int sum = 0, i;
-    for (i = 0; i < 5; i++)
+    int sum = 0;
+    for (int i = 0; i < 5; i++)
         sum += arr[i];
     return ((sum / 5) >= 90);
 }

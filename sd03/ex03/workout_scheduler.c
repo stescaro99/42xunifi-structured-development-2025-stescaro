@@ -12,9 +12,7 @@ static struct WorkoutPlan *prepare_plan(struct UserData *user)
 
 static void assign_daily_tasks(struct WorkoutPlan *plan, int duration)
 {
-    int day;
-    
-    for (day = 1; day <= duration; ++day)
+    for (int day = 1; day <= duration; ++day)
     {
         assign_daily_exercises(plan, day);
         assign_daily_tips(plan, day);

@@ -2,7 +2,11 @@
 
 bool check_cases(const char *s)
 {
-    bool upper = false, lower = false, digit = false, special = false;
+    bool upper = false;
+    bool lower = false;
+    bool digit = false;
+    bool special = false;
+
     for (int i = 0; s[i]; i++)
     {
         if (s[i] >= 'A' && s[i] <= 'Z')
@@ -20,6 +24,7 @@ bool check_cases(const char *s)
 bool diff_pass(const char *s, const char *t)
 {
     int different = 0;
+
     if (ft_strlen(s) != ft_strlen(t))
         return true;
     for (int i = 0; s[i] && t[i]; i++)
