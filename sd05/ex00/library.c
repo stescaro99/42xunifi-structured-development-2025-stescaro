@@ -5,7 +5,8 @@ static char *dup_trim(const char *src)
     char *tmp = strdup(src);
     if (!tmp)
         return NULL;
-    return str_trim(tmp);
+    str_trim(tmp);
+    return tmp;
 }
 
 char *str_trim(char *str)
@@ -163,6 +164,13 @@ int main(void)
     t_catalog catalog;
     t_book results[10];
     int found;
+
+    char *dummy = dup_trim("  prova dup_trim  ");
+    if (dummy)
+    {
+        printf("Dummy trim: '%s'\n", dummy);
+        free(dummy);
+    }
 
     if (!load_catalog("books.csv", &catalog))
     {
