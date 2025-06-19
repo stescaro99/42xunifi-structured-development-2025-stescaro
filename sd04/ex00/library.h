@@ -4,6 +4,8 @@
 #define MAX_BOOKS 1000
 #define MAX_LINE_LEN 1024
 
+#include "../../utils/utils.h"
+
 typedef struct s_book
 {
     int     id;

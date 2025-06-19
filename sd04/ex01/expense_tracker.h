@@ -4,6 +4,8 @@
 #define MAX_EXPENSES 1000
 #define MAX_LINE_LEN 1024
 
+#include "../../utils/utils.h"
+
 typedef struct s_expense
 {
     char    date[11];
@@ -32,7 +34,6 @@ int     filter_by_date_range(const t_expense_list *list, const char *start, cons
 void    print_summary(const t_expense *expenses, int count);
 void    free_expense_list(t_expense_list *list);
 char    *str_trim(char *str);
-int     strcasestr_custom(const char *haystack, const char *needle);
 int     is_valid_date(const char *date);
 int     compare_dates(const char *date1, const char *date2);
 

@@ -1,15 +1,5 @@
 #include "password_validator.h"
 
-static int ft_strlen(const char *s)
-{
-    if (!s)
-        return 0;
-    int i=0;
-    while (s[i])
-        i++;
-    return i;
-}
-
 static bool check_cases(const char *s)
 {
     bool upper = false;

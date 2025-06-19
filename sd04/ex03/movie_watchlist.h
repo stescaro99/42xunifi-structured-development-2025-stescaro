@@ -4,6 +4,8 @@
 #define MAX_MOVIES 1000
 #define MAX_LINE_LEN 1024
 
+#include "../../utils/utils.h"
+
 typedef struct s_movie
 {
     int     id;
@@ -33,7 +35,6 @@ int     update_movie(t_movie_list *list, int id, const char *new_title, const ch
 int     delete_movie(t_movie_list *list, int id);
 void    show_summary(const t_movie_list *list);
 char    *str_trim(char *str);
-int     strcasestr_custom(const char *haystack, const char *needle);
 int     is_valid_date(const char *date);
 int     is_unique_id(const t_movie_list *list, int id);
 void    free_movie_list(t_movie_list *list);

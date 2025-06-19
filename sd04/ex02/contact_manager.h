@@ -4,6 +4,8 @@
 #define MAX_CONTACTS 1000
 #define MAX_LINE_LEN 1024
 
+#include "../../utils/utils.h"
+
 typedef struct s_contact
 {
     int     id;
@@ -30,7 +32,6 @@ int     add_contact(t_contact_list *list, const t_contact *new_contact);
 int     update_contact(t_contact_list *list, int id, const t_contact *updated_contact);
 int     delete_contact(t_contact_list *list, int id);
 char    *str_trim(char *str);
-int     strcasestr_custom(const char *haystack, const char *needle);
 int     is_valid_email(const char *email);
 int     is_valid_phone(const char *phone);
 int     is_unique_id(const t_contact_list *list, int id);
