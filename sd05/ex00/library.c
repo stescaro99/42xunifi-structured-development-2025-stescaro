@@ -66,7 +66,7 @@ static int parse_line(char *line, t_book *book)
 
 static void handle_parse_result(int parse_ok, t_book *tmp)
 {
-    if (!parse_ok)
+    if (!parse_ok && tmp)
     {
         if (tmp->title)
             free(tmp->title);
