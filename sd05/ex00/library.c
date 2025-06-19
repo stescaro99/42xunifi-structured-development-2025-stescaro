@@ -65,10 +65,24 @@ static int parse_line(char *line, t_book *book)
     book->id = atoi(str_trim(fields[0]));
     if (book->id <= 0)
         return 0;
-    book->title = dup_trim(fields[1]);
-    book->author = dup_trim(fields[2]);
-    if (!book->title || !book->author || !*book->title || !*book->author)
+    char *title_raw = strdup(fields[1]);
+    char *author_raw = strdup(fields[2]);
+    if (!title_raw || !author_raw)
+    {
+        free(title_raw);
+        free(author_raw);
         return 0;
+    }
+    char *title_trimmed = str_trim(title_raw);
+    char *author_trimmed = str_trim(author_raw);
+    if (!*title_trimmed || !*author_trimmed)
+    {
+        free(title_raw);
+        free(author_raw);
+        return 0;
+    }
+    book->title = title_raw;
+    book->author = author_raw;
     return 1;
 }
 
@@ -97,8 +111,9 @@ int load_catalog(const char *filename, t_catalog *catalog)
         }
         else
         {
+            free(tmp.title);
+            free(tmp.author);
         }
-        free(lineptr);
     }
     fclose(f);
     catalog->count = count;
