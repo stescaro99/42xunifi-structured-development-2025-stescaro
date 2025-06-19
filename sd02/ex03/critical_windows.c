@@ -1,41 +1,46 @@
-static short condition1(const int *arr)
+#include "critical_windows.h"
+
+static int condition1(const int *arr)
 {
-    int count=0;
-    for (int i=0; i < 5; i++)
+    int i, count = 0;
+    for (i = 0; i < 5; i++)
     {
         if (arr[i] >= 70)
             count++;
     }
-    if (count > 2)
-        return 1;
-    return 0;
+    return (count > 2);
 }
 
-static short condition2(const int *arr)
+static int condition2(const int *arr)
 {
-    int i = 0;
-    while (i < 5)
+    int i;
+    int found = 0;
+    for (i = 0; i < 5; i++)
     {
         if (arr[i] > 150)
-            i = 5;
-        i++;
+            found = 1;
     }
-    return (i == 5);
+    if (found)
+        return 0;
+    return 1;
 }
 
-static short condition3(const int *arr)
+static int condition3(const int *arr)
 {
-    if ((arr[0] + arr[1] + arr[2] + arr[3] + arr[4])/5 >= 90)
-        return 1;
-    return 0;
+    int sum = 0, i;
+    for (i = 0; i < 5; i++)
+        sum += arr[i];
+    return ((sum / 5) >= 90);
 }
 
 int count_critical_windows(const int *readings, int size)
 {
-    if (size < 5)
+    int count = 0;
+    int i;
+
+    if (readings == 0 || size < 5)
         return 0;
-    int count=0;
-    for (int i=0; i < size - 4; i++)
+    for (i = 0; i <= size - 5; i++)
     {
         if (condition1(&readings[i]) || condition2(&readings[i]) || condition3(&readings[i]))
             count++;

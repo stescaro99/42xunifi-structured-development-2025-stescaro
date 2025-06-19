@@ -1,45 +1,47 @@
 #include "password_validator.h"
 
-static short check_replace(const char *s, const char *t)
+static bool check_replace(const char *s, const char *t)
 {
-    short change = 0;
+    bool change = false;
     int i = 0;
-    while (i > -1 && s[i])
+    int fail = 0;
+    while (s[i] && t[i])
     {
         if (s[i] != t[i])
         {
             if (change)
-                i = -10;
-            change = 1;
+                fail = 1;
+            change = true;
         }
         i++;
     }
-    if (i < 0)
-        return 0;
-    return 1;
+    return (fail == 0);
 }
 
-static short check_insert(const char *longer, const char *shorter)
+static bool check_insert(const char *longer, const char *shorter)
 {
-    short change = 0;
-    int j = 0;
-    for (int i = 0; j > -1 && longer[i]; i++)
+    bool change = false;
+    int i = 0, j = 0;
+    int fail = 0;
+    while (longer[i])
     {
-        if (change || longer[i] == shorter[j])
+        if (!change && longer[i] != shorter[j])
         {
-            if (longer[i] != shorter[j])
-                j = -10;
+            change = true;
+            i++;
+        }
+        else if (change && longer[i] != shorter[j])
+            fail = 1;
+        else
+        {
+            i++;
             j++;
         }
-        else
-            change = 1;
     }
-    if (j < 0)
-        return 0;
-    return 1;
+    return (fail == 0);
 }
 
-static short check_similar(const char *s, const char *t)
+static bool check_similar(const char *s, const char *t)
 {
     int len_s = ft_strlen(s);
     int len_t = ft_strlen(t);
@@ -50,14 +52,14 @@ static short check_similar(const char *s, const char *t)
         return check_insert(s, t);
     if (len_s + 1 == len_t)
         return check_insert(t, s);
-    return 0;
+    return false;
 }
 
 static void safe_strcpy(char *dest, const char *src, size_t dest_size)
 {
+    size_t i = 0;
     if (dest_size == 0)
         return;
-    size_t i = 0;
     while (i < dest_size - 1 && src[i])
     {
         dest[i] = src[i];
@@ -68,17 +70,14 @@ static void safe_strcpy(char *dest, const char *src, size_t dest_size)
 
 PwStatus validate_password(const char *new_pw, PasswordHistory *history)
 {
+    int i;
     if (validate_password_weak(new_pw, (*history)[0]) == 1)
         return 1;
-    int i = 0;
-    while (i < 3)
+    for (i = 0; i < 3; i++)
     {
         if (check_similar(new_pw, (*history)[i]))
-            i = 30;
-        i++;
+            return 2;
     }
-    if (i > 3)
-        return 2;
     safe_strcpy((*history)[2], (*history)[1], 1024);
     safe_strcpy((*history)[1], (*history)[0], 1024);
     safe_strcpy((*history)[0], new_pw, 1024);

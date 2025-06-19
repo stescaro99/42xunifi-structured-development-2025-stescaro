@@ -2,32 +2,35 @@
 
 int compute_total_size(const FSNode *node)
 {
+    int total = 0;
+    const FSNode *child;
     if (!node)
         return 0;
-    int total = 0;
-    const FSNode *tmp = get_children(node);
-    while (tmp)
+    child = get_children(node);
+    while (child)
     {
-        if (tmp->size == 0)
-            total += compute_total_size(tmp);
+        if (child->size == 0)
+            total += compute_total_size(child);
         else
-            total += tmp->size;
-        tmp = get_sibling(tmp);
+            total += child->size;
+        child = get_sibling(child);
     }
     return total;
 }
 
 void print_structure(const FSNode *node, int indent)
 {
+    int i;
+    const FSNode *child;
     if (!node)
         return;
-    for (int i = 0; i < indent; i++)
+    for (i = 0; i < indent; i++)
         printf("  ");
     if (node->size == 0)
         printf("[DIR] %s\n", node->name);
     else
         printf("%s (%d)\n", node->name, node->size);
-    const FSNode *child = get_children(node);
+    child = get_children(node);
     while (child)
     {
         print_structure(child, indent + 1);
@@ -37,14 +40,15 @@ void print_structure(const FSNode *node, int indent)
 
 void free_filesystem(FSNode *node)
 {
+    FSNode *child, *sibling;
     if (!node)
-        return ;
-    FSNode *tmp = get_children(node);
-    while (tmp)
+        return;
+    child = get_children(node);
+    while (child)
     {
-        FSNode *sibling = get_sibling(tmp);
-        free_filesystem(tmp);
-        tmp = sibling;                   
+        sibling = get_sibling(child);
+        free_filesystem(child);
+        child = sibling;
     }
     free(node->name);
     free(node);

@@ -1,21 +1,27 @@
 #include "average.h"
 
-float average(const int *array, int size) 
+static int is_valid_score(int value)
 {
-    if (size <= 0 || array == NULL) 
+    return (value >= 0 && value <= 100);
+}
+
+float average(const int *array, int size)
+{
+    int sum = 0;
+    int count = 0;
+    int i;
+
+    if (array == 0 || size <= 0)
         return 0.0f;
-    int total = 0;
-    int number = 0;
-    
-    for (int i = 0; i < size; i++) 
+    for (i = 0; i < size; i++)
     {
-        if (!(array[i] < 0 || array[i] > 100))
+        if (is_valid_score(array[i]))
         {
-            total += array[i];
-            number++;
+            sum += array[i];
+            count++;
         }
     }
-    if (total == 0) 
+    if (count == 0)
         return 0.0f;
-    return (float)total / number;
+    return (float)sum / count;
 }

@@ -1,3 +1,6 @@
+#ifndef GRADE_MAP_DIST_H
+#define GRADE_MAP_DIST_H
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -12,3 +15,5 @@ typedef struct GradeNode {
 GradeNode *compute_distribution(const char **mapped_grades, int size);
 void print_distribution(GradeNode *head);
 void free_distribution(GradeNode *head);
+
+#endif

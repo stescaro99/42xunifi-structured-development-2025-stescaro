@@ -2,30 +2,28 @@
 
 static GradeNode* find_grade_node(GradeNode *head, const char *grade)
 {
-    int len = 0;
-    while (head && len > -1)
+    GradeNode *found = NULL;
+    while (head)
     {
         if (strcmp(head->grade, grade) == 0)
-            len = -100;
+            found = head;
         head = head->next;
-        len++;
     }
-    if (len < 0)
-        return head;
-    return NULL;
+    return found;
 }
 
 GradeNode *compute_distribution(const char **mapped_grades, int size)
 {
     GradeNode *head = NULL;
-    for (int i = 0; i < size; ++i)
+    int i;
+    for (i = 0; i < size; ++i)
     {
         GradeNode *node = find_grade_node(head, mapped_grades[i]);
         if (node)
             node->count++;
         else
         {
-            GradeNode *new_node = malloc(sizeof(GradeNode));
+            GradeNode *new_node = (GradeNode *)malloc(sizeof(GradeNode));
             if (new_node)
             {
                 new_node->grade = mapped_grades[i];
@@ -50,9 +48,10 @@ void print_distribution(GradeNode *head)
 
 void free_distribution(GradeNode *head)
 {
+    GradeNode *tmp;
     while (head)
     {
-        GradeNode *tmp = head;
+        tmp = head;
         head = head->next;
         free(tmp);
     }
