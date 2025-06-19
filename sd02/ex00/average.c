@@ -9,11 +9,10 @@ float average(const int *array, int size)
 {
     int sum = 0;
     int count = 0;
-    int i;
 
     if (array == 0 || size <= 0)
         return 0.0f;
-    for (i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         if (is_valid_score(array[i]))
         {

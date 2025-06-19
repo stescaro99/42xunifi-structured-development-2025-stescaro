@@ -20,11 +20,10 @@ int compute_total_size(const FSNode *node)
 
 void print_structure(const FSNode *node, int indent)
 {
-    int i;
     const FSNode *child;
     if (!node)
         return;
-    for (i = 0; i < indent; i++)
+    for (int i = 0; i < indent; i++)
         printf("  ");
     if (node->size == 0)
         printf("[DIR] %s\n", node->name);

@@ -70,14 +70,17 @@ static void safe_strcpy(char *dest, const char *src, size_t dest_size)
 
 PwStatus validate_password(const char *new_pw, PasswordHistory *history)
 {
-    int i;
+    bool valid_password = true;
+
     if (validate_password_weak(new_pw, (*history)[0]) == 1)
         return 1;
-    for (i = 0; i < 3; i++)
+    for (int i = 0; valid_password && i < 3; i++)
     {
         if (check_similar(new_pw, (*history)[i]))
-            return 2;
+            valid_password = false;
     }
+    if (!valid_password)
+        return 2;
     safe_strcpy((*history)[2], (*history)[1], 1024);
     safe_strcpy((*history)[1], (*history)[0], 1024);
     safe_strcpy((*history)[0], new_pw, 1024);
