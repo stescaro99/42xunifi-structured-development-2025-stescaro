@@ -116,6 +116,8 @@ int load_catalog(const char *filename, t_catalog *catalog)
     while (read_line(f, line, sizeof(line)) && count < MAX_BOOKS)
     {
         t_book tmp;
+        tmp.title = NULL;
+        tmp.author = NULL;
         int parse_ok = process_line(line, &tmp);
         if (parse_ok)
         {
