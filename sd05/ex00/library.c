@@ -75,37 +75,56 @@ static void handle_parse_result(int parse_ok, t_book *tmp)
     }
 }
 
+static int open_file(const char *filename, FILE **f)
+{
+    if (!filename || !f)
+        return 0;
+    *f = fopen(filename, "r");
+    return (*f != NULL);
+}
+
+static int read_line(FILE *f, char *line, size_t size)
+{
+    if (!f || !line || size == 0)
+        return 0;
+    return (fgets(line, size, f) != NULL);
+}
+
+static int process_line(const char *line, t_book *tmp)
+{
+    char *lineptr = strdup(line);
+    int ok = 0;
+    if (lineptr)
+    {
+        tmp->title = NULL;
+        tmp->author = NULL;
+        ok = parse_line(lineptr, tmp);
+        free(lineptr);
+    }
+    return ok;
+}
+
 int load_catalog(const char *filename, t_catalog *catalog)
 {
     FILE *f;
     char line[MAX_LINE_LEN];
     int count = 0;
-    int parse_ok;
-    if (!filename || !catalog)
+
+    if (!open_file(filename, &f))
         return 0;
-    f = fopen(filename, "r");
-    if (!f)
-        return 0;
-    while (fgets(line, sizeof(line), f) && count < MAX_BOOKS)
+
+    while (read_line(f, line, sizeof(line)) && count < MAX_BOOKS)
     {
         t_book tmp;
-        char *lineptr = strdup(line);
-
-        tmp.title = NULL;
-        tmp.author = NULL;
-        if (lineptr)
+        int parse_ok = process_line(line, &tmp);
+        if (parse_ok)
         {
-            parse_ok = parse_line(lineptr, &tmp);
-            if (parse_ok)
-            {
-                catalog->books[count].id = tmp.id;
-                catalog->books[count].title = tmp.title;
-                catalog->books[count].author = tmp.author;
-                count++;
-            }
-            handle_parse_result(parse_ok, &tmp);
-            free(lineptr);
+            catalog->books[count].id = tmp.id;
+            catalog->books[count].title = tmp.title;
+            catalog->books[count].author = tmp.author;
+            count++;
         }
+        handle_parse_result(parse_ok, &tmp);
     }
     fclose(f);
     catalog->count = count;
