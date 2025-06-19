@@ -26,12 +26,12 @@ static int parse_line(char *line, t_book *book)
 {
     char *fields[3];
     int i = 0;
-    char *token = strtok(line, ",");
+    char *token = strtok_r(line, ",");
 
     while (token && i < 3)
     {
         fields[i++] = token;
-        token = strtok(NULL, ",");
+        token = strtok_r(NULL, ",");
     }
     if (i != 3)
         return 0;
@@ -49,8 +49,8 @@ static int parse_line(char *line, t_book *book)
             free(author_raw);
         return 0;
     }
-    char *title_trimmed = str_trim(title_raw);
-    char *author_trimmed = str_trim(author_raw);
+    const char *title_trimmed = str_trim(title_raw);
+    const char *author_trimmed = str_trim(author_raw);
     if (!*title_trimmed || !*author_trimmed)
     {
         free(title_raw);
@@ -88,11 +88,9 @@ int load_catalog(const char *filename, t_catalog *catalog)
     {
         t_book tmp;
         char *lineptr = strdup(line);
-        int should_store = 0;
 
         tmp.title = NULL;
         tmp.author = NULL;
-
         if (lineptr)
         {
             parse_ok = parse_line(lineptr, &tmp);
@@ -101,7 +99,6 @@ int load_catalog(const char *filename, t_catalog *catalog)
                 catalog->books[count].id = tmp.id;
                 catalog->books[count].title = tmp.title;
                 catalog->books[count].author = tmp.author;
-                should_store = 1;
                 count++;
             }
             handle_parse_result(parse_ok, &tmp);
@@ -116,10 +113,10 @@ int load_catalog(const char *filename, t_catalog *catalog)
 int search_by_title(const t_catalog *catalog, const char *substr, t_book *results, int max_results)
 {
     int found = 0;
-    int i;
+    
     if (!catalog || !substr || !results || max_results <= 0)
         return 0;
-    for (i = 0; i < catalog->count && found < max_results; i++)
+    for (int i = 0; i < catalog->count && found < max_results; i++)
     {
         if (strcasestr_custom(catalog->books[i].title, substr))
             results[found++] = catalog->books[i];
@@ -130,10 +127,10 @@ int search_by_title(const t_catalog *catalog, const char *substr, t_book *result
 int search_by_author(const t_catalog *catalog, const char *substr, t_book *results, int max_results)
 {
     int found = 0;
-    int i;
+    
     if (!catalog || !substr || !results || max_results <= 0)
         return 0;
-    for (i = 0; i < catalog->count && found < max_results; i++)
+    for (int i = 0; i < catalog->count && found < max_results; i++)
     {
         if (strcasestr_custom(catalog->books[i].author, substr))
             results[found++] = catalog->books[i];
@@ -150,10 +147,9 @@ void print_book(const t_book *book)
 
 void free_catalog(t_catalog *catalog)
 {
-    int i;
     if (!catalog)
         return;
-    for (i = 0; i < catalog->count; i++)
+    for (int i = 0; i < catalog->count; i++)
     {
         free(catalog->books[i].title);
         free(catalog->books[i].author);
