@@ -1,5 +1,5 @@
 NAME = library
-SRC = library.c ../../utils/ft_strlen.c ../../utils/strcasestr_custom.c
+SRC = ../../sd05/ex00/library.c library.c ../../utils/ft_strlen.c ../../utils/strcasestr_custom.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 
